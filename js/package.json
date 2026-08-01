@@ -1,0 +1,28 @@
+{
+  "name": "@lib-cnpj/js",
+  "version": "1.0.0",
+  "description": "Fast CNPJ validation and formatting for JavaScript, supporting numeric and alphanumeric formats.",
+  "type": "module",
+  "main": "src/cnpj.js",
+  "module": "src/cnpj.js",
+  "exports": {
+    ".": "./src/cnpj.js"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "cnpj",
+    "brazil",
+    "validation",
+    "alphanumeric",
+    "tax-id"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

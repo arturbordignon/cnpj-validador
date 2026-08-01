@@ -1,0 +1,30 @@
+{
+  "valid": [
+    {"value": "11.222.333/0001-81", "description": "legacy numeric formatted"},
+    {"value": "11222333000181", "description": "legacy numeric raw"},
+    {"value": "12.ABC.345/01DE-35", "description": "alphanumeric formatted"},
+    {"value": "12ABC34501DE35", "description": "alphanumeric raw"}
+  ],
+  "invalid": [
+    {"value": "11.222.333/0001-82", "description": "wrong check digit numeric"},
+    {"value": "12.ABC.345/01DE-36", "description": "wrong check digit alphanumeric"},
+    {"value": "00.000.000/0000-00", "description": "all zeros formatted"},
+    {"value": "00000000000000", "description": "all zeros raw"},
+    {"value": "11.222.333/0001-8", "description": "too short"},
+    {"value": "112233", "description": "much too short"},
+    {"value": "", "description": "empty"},
+    {"value": "11.222.333/0001-8A", "description": "non-numeric check digit"},
+    {"value": "12.ABC.345/01DE-3I", "description": "non-numeric check digit alphanumeric"},
+    {"value": "11.222.333/0001_81", "description": "disallowed underscore"},
+    {"value": "11.222.333/0001 81", "description": "disallowed space"},
+    {"value": "12.abc.345/01de-35", "description": "lowercase"}
+  ],
+  "checkDigits": [
+    {"base": "112223330001", "digits": "81"},
+    {"base": "12ABC34501DE", "digits": "35"}
+  ],
+  "formatCases": [
+    {"raw": "11222333000181", "formatted": "11.222.333/0001-81"},
+    {"raw": "12ABC34501DE35", "formatted": "12.ABC.345/01DE-35"}
+  ]
+}

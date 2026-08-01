@@ -1,0 +1,24 @@
+# Composer
+php/vendor/
+php/composer.lock
+
+# Node
+js/node_modules/
+js/package-lock.json
+
+# Maven / Java
+java/target/
+java/.classpath
+java/.project
+java/.settings/
+java/.maven/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
