@@ -106,6 +106,49 @@ console.log(strip('11.222.333/0001-81'));     // 11222333000181
 console.log(calculateCheckDigits('12ABC34501DE')); // '35'
 ```
 
+### Usage with jQuery / legacy browsers
+
+Build the UMD file locally:
+
+```bash
+cd js
+npm install
+npm run build
+```
+
+Then include the generated file with a `<script>` tag:
+
+```html
+<script src="js/dist/cnpj.umd.js"></script>
+<script>
+  if (LibCnpj.isValid('12.ABC.345/01DE-35')) {
+    // valid
+  }
+
+  document.getElementById('cnpj').value = LibCnpj.format('11222333000181');
+</script>
+```
+
+Or load directly from a CDN after publishing to npm:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@lib-cnpj/js@latest/dist/cnpj.umd.js"></script>
+```
+
+With jQuery:
+
+```js
+$('#cnpj').on('blur', function () {
+  var value = $(this).val();
+
+  if (LibCnpj.isValid(value)) {
+    $(this).val(LibCnpj.format(value));
+  } else {
+    $(this).addClass('is-invalid');
+  }
+});
+```
+
 ## Java
 
 ### Installation
@@ -150,20 +193,58 @@ public class Example {
 # PHP
 cd php
 composer install
-./vendor/bin/phpunit
+composer check    # lint + static analysis + tests
 
 # JavaScript
 cd js
 npm install
-npm test
+npm run check     # lint + tests + build
 
 # Java
 cd java
-mvn test
+mvn test          # checkstyle runs automatically during validate
+```
+
+## Benchmark
+
+```bash
+# PHP
+cd php
+composer benchmark
+
+# JavaScript
+cd js
+npm run benchmark
+
+# Java
+cd java
+mvn compile exec:java
 ```
 
 All three test suites load the same cases from `fixtures/test-vectors.json`,
 ensuring cross-language consistency.
+
+## Compatibility
+
+### PHP
+
+- Requires PHP **7.4 or later**.
+- Zero runtime dependencies.
+- Works in legacy projects as long as they run PHP 7.4+.
+- Projects on PHP 5.6 must be upgraded to use this library.
+
+### JavaScript
+
+- Source uses ES modules and is tested on Node **18+**.
+- The UMD build (`dist/cnpj.umd.js`) works in old browsers and with jQuery
+  without any bundler.
+- The CommonJS build (`dist/cnpj.cjs`) works with `require()` in older Node
+  projects.
+
+### Java
+
+- Requires Java **8 or later**.
+- Zero runtime dependencies.
 
 ## Integration guide for large projects
 

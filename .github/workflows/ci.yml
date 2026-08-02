@@ -28,6 +28,14 @@ jobs:
         working-directory: php
         run: composer update --no-progress --prefer-dist
 
+      - name: Run PHP-CS-Fixer
+        working-directory: php
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Run PHPStan
+        working-directory: php
+        run: ./vendor/bin/phpstan analyse --no-progress
+
       - name: Run PHPUnit
         working-directory: php
         run: ./vendor/bin/phpunit
@@ -48,9 +56,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install dependencies
+        working-directory: js
+        run: npm install
+
+      - name: Run ESLint
+        working-directory: js
+        run: npm run lint
+
       - name: Run tests
         working-directory: js
         run: npm test
+
+      - name: Verify build
+        working-directory: js
+        run: npm run build
 
   java:
     name: Java Tests

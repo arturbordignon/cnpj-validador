@@ -106,6 +106,49 @@ console.log(strip('11.222.333/0001-81'));     // 11222333000181
 console.log(calculateCheckDigits('12ABC34501DE')); // '35'
 ```
 
+### Uso com jQuery / navegadores antigos
+
+Gere o build UMD localmente:
+
+```bash
+cd js
+npm install
+npm run build
+```
+
+Depois inclua o arquivo gerado com uma tag `<script>`:
+
+```html
+<script src="js/dist/cnpj.umd.js"></script>
+<script>
+  if (LibCnpj.isValid('12.ABC.345/01DE-35')) {
+    // válido
+  }
+
+  document.getElementById('cnpj').value = LibCnpj.format('11222333000181');
+</script>
+```
+
+Ou use diretamente de um CDN após publicar no npm:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@lib-cnpj/js@latest/dist/cnpj.umd.js"></script>
+```
+
+Com jQuery:
+
+```js
+$('#cnpj').on('blur', function () {
+  var value = $(this).val();
+
+  if (LibCnpj.isValid(value)) {
+    $(this).val(LibCnpj.format(value));
+  } else {
+    $(this).addClass('is-invalid');
+  }
+});
+```
+
 ## Java
 
 ### Instalação
@@ -150,20 +193,58 @@ public class Exemplo {
 # PHP
 cd php
 composer install
-./vendor/bin/phpunit
+composer check    # lint + análise estática + testes
 
 # JavaScript
 cd js
 npm install
-npm test
+npm run check     # lint + testes + build
 
 # Java
 cd java
-mvn test
+mvn test          # checkstyle roda automaticamente na fase validate
+```
+
+## Benchmark
+
+```bash
+# PHP
+cd php
+composer benchmark
+
+# JavaScript
+cd js
+npm run benchmark
+
+# Java
+cd java
+mvn compile exec:java
 ```
 
 Os três conjuntos de testes carregam os mesmos casos do arquivo
 `fixtures/test-vectors.json`, garantindo consistência entre as linguagens.
+
+## Compatibilidade
+
+### PHP
+
+- Requer PHP **7.4 ou superior**.
+- Zero dependências em tempo de execução.
+- Funciona em projetos legados desde que estejam no PHP 7.4+.
+- Projetos em PHP 5.6 precisam ser atualizados para usar esta biblioteca.
+
+### JavaScript
+
+- O código-fonte usa ES modules e é testado no Node **18+**.
+- O build UMD (`dist/cnpj.umd.js`) funciona em navegadores antigos e com
+  jQuery sem necessidade de bundler.
+- O build CommonJS (`dist/cnpj.cjs`) funciona com `require()` em projetos
+  Node antigos.
+
+### Java
+
+- Requer Java **8 ou superior**.
+- Zero dependências em tempo de execução.
 
 ## Guia de integração para projetos grandes
 

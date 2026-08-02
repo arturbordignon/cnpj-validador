@@ -2,9 +2,14 @@
 php/vendor/
 php/composer.lock
 
+# PHP tooling
+php/.php-cs-fixer.cache
+php/.phpunit.result.cache
+
 # Node
 js/node_modules/
 js/package-lock.json
+js/dist/
 
 # Maven / Java
 java/target/

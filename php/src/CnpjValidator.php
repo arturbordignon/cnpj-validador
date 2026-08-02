@@ -120,6 +120,9 @@ final class CnpjValidator
         return false;
     }
 
+    /**
+     * @param array<int, int> $weights
+     */
     private static function calculateDigit(string $value, array $weights): string
     {
         $sum = 0;

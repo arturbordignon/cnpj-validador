@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 public final class CnpjFormatter {
 
     private static final Pattern MASK_CHARACTERS = Pattern.compile("[./-]");
-    private static final Pattern FORMATTED_PATTERN = Pattern.compile("^[A-Z0-9]{2}\\.[A-Z0-9]{3}\\.[A-Z0-9]{3}/[A-Z0-9]{4}-[0-9]{2}$");
+    private static final Pattern FORMATTED_PATTERN = Pattern.compile(
+        "^[A-Z0-9]{2}\\.[A-Z0-9]{3}\\.[A-Z0-9]{3}/[A-Z0-9]{4}-[0-9]{2}$"
+    );
     private static final Pattern ALLOWED_CHARACTERS_PATTERN = Pattern.compile("^[A-Z0-9./-]+$");
 
     private CnpjFormatter() {
