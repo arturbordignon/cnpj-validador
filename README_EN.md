@@ -9,6 +9,12 @@ numeric one and does **not** replace existing CNPJs.
 
 > Versão em português: [README.md](README.md)
 
+![CI](https://github.com/lib-cnpj/cnpj-validator/actions/workflows/ci.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Packagist](https://img.shields.io/packagist/v/lib-cnpj/php)](https://packagist.org/packages/lib-cnpj/php)
+[![npm](https://img.shields.io/npm/v/@lib-cnpj/js)](https://www.npmjs.com/package/@lib-cnpj/js)
+[![Maven Central](https://img.shields.io/maven-central/v/com.libcnpj/lib-cnpj)](https://search.maven.org/artifact/com.libcnpj/lib-cnpj)
+
 ## Using only one language
 
 This repository is a monorepo, but you can use only the folder for your
