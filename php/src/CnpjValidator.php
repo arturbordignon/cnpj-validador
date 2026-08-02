@@ -27,27 +27,30 @@ final class CnpjValidator
             return false;
         }
 
-        $clean = CnpjFormatter::strip($value);
+        $strippedValue = CnpjFormatter::strip($value);
 
-        if (strlen($clean) !== self::LENGTH) {
+        if (strlen($strippedValue) !== self::LENGTH) {
             return false;
         }
 
-        if ($clean === self::ALL_ZEROS) {
+        if ($strippedValue === self::ALL_ZEROS) {
             return false;
         }
 
-        if (self::checkDigitsAreNumeric(substr($clean, self::BASE_LENGTH, 2)) === false) {
+        $base = substr($strippedValue, 0, self::BASE_LENGTH);
+        $informedCheckDigits = substr($strippedValue, self::BASE_LENGTH, 2);
+
+        if (self::checkDigitsAreNumeric($informedCheckDigits) === false) {
             return false;
         }
 
-        $calculated = self::calculateCheckDigits(substr($clean, 0, self::BASE_LENGTH));
+        $calculatedCheckDigits = self::calculateCheckDigits($base);
 
-        if ($calculated === null) {
+        if ($calculatedCheckDigits === null) {
             return false;
         }
 
-        if ($calculated !== substr($clean, self::BASE_LENGTH, 2)) {
+        if ($calculatedCheckDigits !== $informedCheckDigits) {
             return false;
         }
 
@@ -60,7 +63,7 @@ final class CnpjValidator
             return null;
         }
 
-        if (self::baseIsValid($base) === false) {
+        if (self::containsOnlyAlphanumericDigits($base) === false) {
             return null;
         }
 
@@ -72,7 +75,7 @@ final class CnpjValidator
         return $firstDigit . $secondDigit;
     }
 
-    private static function baseIsValid(string $base): bool
+    private static function containsOnlyAlphanumericDigits(string $base): bool
     {
         $length = strlen($base);
 

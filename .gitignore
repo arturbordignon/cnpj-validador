@@ -2,9 +2,10 @@
 php/vendor/
 php/composer.lock
 
-# PHP tooling
+# PHP tooling / build output
 php/.php-cs-fixer.cache
 php/.phpunit.result.cache
+php/dist/
 
 # Node
 js/node_modules/

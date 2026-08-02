@@ -18,30 +18,30 @@ public final class CnpjValidator {
             return false;
         }
 
-        String clean = CnpjFormatter.strip(value);
+        String strippedValue = CnpjFormatter.strip(value);
 
-        if (clean.length() != LENGTH) {
+        if (strippedValue.length() != LENGTH) {
             return false;
         }
 
-        if (ALL_ZEROS.equals(clean)) {
+        if (ALL_ZEROS.equals(strippedValue)) {
             return false;
         }
 
-        String base = clean.substring(0, BASE_LENGTH);
-        String informedDigits = clean.substring(BASE_LENGTH, LENGTH);
+        String base = strippedValue.substring(0, BASE_LENGTH);
+        String informedCheckDigits = strippedValue.substring(BASE_LENGTH, LENGTH);
 
-        if (checkDigitsAreNumeric(informedDigits) == false) {
+        if (checkDigitsAreNumeric(informedCheckDigits) == false) {
             return false;
         }
 
-        String calculated = calculateCheckDigits(base);
+        String calculatedCheckDigits = calculateCheckDigits(base);
 
-        if (calculated == null) {
+        if (calculatedCheckDigits == null) {
             return false;
         }
 
-        return calculated.equals(informedDigits);
+        return calculatedCheckDigits.equals(informedCheckDigits);
     }
 
     public static String calculateCheckDigits(String base) {
@@ -49,7 +49,7 @@ public final class CnpjValidator {
             return null;
         }
 
-        if (baseIsValid(base) == false) {
+        if (containsOnlyAlphanumericDigits(base) == false) {
             return null;
         }
 
@@ -60,7 +60,7 @@ public final class CnpjValidator {
         return firstDigit + secondDigit;
     }
 
-    private static boolean baseIsValid(String base) {
+    private static boolean containsOnlyAlphanumericDigits(String base) {
         for (int index = 0; index < base.length(); index = index + 1) {
             if (isAlphanumericDigit(base.charAt(index)) == false) {
                 return false;

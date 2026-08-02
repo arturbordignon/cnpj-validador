@@ -33,10 +33,17 @@
         "lint": "php-cs-fixer fix --dry-run --diff",
         "lint:fix": "php-cs-fixer fix",
         "benchmark": "php benchmark/benchmark.php",
+        "build": "php build.php",
         "check": [
             "@lint",
             "@analyse",
             "@test"
+        ],
+        "post-install-cmd": [
+            "@build"
+        ],
+        "post-update-cmd": [
+            "@build"
         ]
     }
 }

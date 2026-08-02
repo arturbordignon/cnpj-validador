@@ -7,22 +7,22 @@ export function strip(value) {
 }
 
 export function format(value) {
-  const clean = strip(value);
+  const strippedValue = strip(value);
 
-  if (clean.length !== 14) {
+  if (strippedValue.length !== 14) {
     return value;
   }
 
   return (
-    clean.slice(0, 2) +
+    strippedValue.slice(0, 2) +
     '.' +
-    clean.slice(2, 5) +
+    strippedValue.slice(2, 5) +
     '.' +
-    clean.slice(5, 8) +
+    strippedValue.slice(5, 8) +
     '/' +
-    clean.slice(8, 12) +
+    strippedValue.slice(8, 12) +
     '-' +
-    clean.slice(12, 14)
+    strippedValue.slice(12, 14)
   );
 }
 

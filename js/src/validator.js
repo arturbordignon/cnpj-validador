@@ -13,30 +13,30 @@ export function isValid(value) {
     return false;
   }
 
-  const clean = strip(value);
+  const strippedValue = strip(value);
 
-  if (clean.length !== LENGTH) {
+  if (strippedValue.length !== LENGTH) {
     return false;
   }
 
-  if (clean === ALL_ZEROS) {
+  if (strippedValue === ALL_ZEROS) {
     return false;
   }
 
-  const base = clean.slice(0, BASE_LENGTH);
-  const informedDigits = clean.slice(BASE_LENGTH, LENGTH);
+  const base = strippedValue.slice(0, BASE_LENGTH);
+  const informedCheckDigits = strippedValue.slice(BASE_LENGTH, LENGTH);
 
-  if (checkDigitsAreNumeric(informedDigits) === false) {
+  if (checkDigitsAreNumeric(informedCheckDigits) === false) {
     return false;
   }
 
-  const calculated = calculateCheckDigits(base);
+  const calculatedCheckDigits = calculateCheckDigits(base);
 
-  if (calculated === null) {
+  if (calculatedCheckDigits === null) {
     return false;
   }
 
-  if (calculated !== informedDigits) {
+  if (calculatedCheckDigits !== informedCheckDigits) {
     return false;
   }
 
@@ -48,7 +48,7 @@ export function calculateCheckDigits(base) {
     return null;
   }
 
-  if (baseIsValid(base) === false) {
+  if (containsOnlyAlphanumericDigits(base) === false) {
     return null;
   }
 
@@ -59,7 +59,7 @@ export function calculateCheckDigits(base) {
   return firstDigit + secondDigit;
 }
 
-function baseIsValid(base) {
+function containsOnlyAlphanumericDigits(base) {
   for (let index = 0; index < base.length; index = index + 1) {
     if (isAlphanumericDigit(base[index]) === false) {
       return false;

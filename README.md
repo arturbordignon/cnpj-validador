@@ -75,6 +75,9 @@ composer require lib-cnpj/php
 
 ### Uso
 
+Você só precisa carregar o autoloader do Composer e usar a classe `Cnpj`.
+Não é necessário importar `CnpjValidator` ou `CnpjFormatter` manualmente.
+
 ```php
 <?php
 require 'vendor/autoload.php';
@@ -88,6 +91,24 @@ var_dump(Cnpj::isValid('00000000000000'));     // bool(false)
 echo Cnpj::format('11222333000181');     // 11.222.333/0001-81
 echo Cnpj::strip('11.222.333/0001-81');  // 11222333000181
 echo Cnpj::calculateCheckDigits('12ABC34501DE'); // 35
+```
+
+### Uso sem Composer
+
+Se o projeto não usa Composer, gere o arquivo único em `php/dist/libcnpj.php`:
+
+```bash
+cd php
+php build.php
+```
+
+Depois inclua apenas esse arquivo:
+
+```php
+<?php
+require 'caminho/para/php/dist/libcnpj.php';
+
+var_dump(Cnpj::isValid('11.222.333/0001-81')); // bool(true)
 ```
 
 ## JavaScript

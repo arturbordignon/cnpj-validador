@@ -18,21 +18,21 @@ public final class CnpjFormatter {
     }
 
     public static String format(String value) {
-        String clean = strip(value);
+        String strippedValue = strip(value);
 
-        if (clean.length() != 14) {
+        if (strippedValue.length() != 14) {
             return value;
         }
 
-        return clean.substring(0, 2)
+        return strippedValue.substring(0, 2)
             + "."
-            + clean.substring(2, 5)
+            + strippedValue.substring(2, 5)
             + "."
-            + clean.substring(5, 8)
+            + strippedValue.substring(5, 8)
             + "/"
-            + clean.substring(8, 12)
+            + strippedValue.substring(8, 12)
             + "-"
-            + clean.substring(12, 14);
+            + strippedValue.substring(12, 14);
     }
 
     public static boolean isFormatted(String value) {

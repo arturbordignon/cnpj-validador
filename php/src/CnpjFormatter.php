@@ -17,19 +17,19 @@ final class CnpjFormatter
 
     public static function format(string $value): string
     {
-        $clean = self::strip($value);
+        $strippedValue = self::strip($value);
 
-        if (strlen($clean) !== 14) {
+        if (strlen($strippedValue) !== 14) {
             return $value;
         }
 
         return sprintf(
             '%s.%s.%s/%s-%s',
-            substr($clean, 0, 2),
-            substr($clean, 2, 3),
-            substr($clean, 5, 3),
-            substr($clean, 8, 4),
-            substr($clean, 12, 2)
+            substr($strippedValue, 0, 2),
+            substr($strippedValue, 2, 3),
+            substr($strippedValue, 5, 3),
+            substr($strippedValue, 8, 4),
+            substr($strippedValue, 12, 2)
         );
     }
 
